@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Recommendation | Health Checkup</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        Health Checkup
+        <nav class="top-nav">
+            <div><a href="{% url 'home' %}">Home</a></div>
+            <div><a href="{% url 'about' %}">About Us</a></div>
+            <div>Login</div>
+        </nav>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <main class="main-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <nav>
+                <div><a href="{% url 'bmi' %}">BMI Report</a></div>
+                <div><a href="">Diet</a></div>
+                <div><a href="{% url 'Workout' %}">Workout</a></div>
+            </nav>
+        </aside>
+
+        <!-- CONTENT AREA -->
+        <section class="container">
+
+            <h1>Nutrition Recommendation</h1>
+
+            <!-- FILTER FORM -->
+            <form method="post" class="nutrition-form">
+                {% csrf_token %}
+
+                <div class=" hw-card">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" required>
+                        <option value="">All</option>
+                        <option value="Fruit">Fruit</option>
+                        <option value="Vegetable">Vegetable</option>
+                        <option value="Seed">Seed</option>
+                    </select>
+                </div>
+
+                <div class=" hw-card">
+                    <label for="nutrient">Nutrient</label>
+                    <select name="nutrient" id="nutrient" required>
+                        <option value="protein">Protein</option>
+                        <option value="calories">Calories</option>
+                    </select>
+                </div>
+
+                <div class=" hw-card">
+                    <label for="mode">Mode</label>
+                    <select name="mode" id="mode" required>
+                        <option value="max">Maximum</option>
+                        <option value="min">Minimum</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Show Result</button>
+            </form>
+
+            <hr>
+
+            <!-- RESULT TABLE -->
+            {% if result %}
+            <div class="table-wrapper">
+                <table class="result-table" border="2">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Food Name</th>
+                            <th>Calories (kcal)</th>
+                            <th>Protein (g)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in result %}
+                        <tr>
+                            <td>{{ row.Category }}</td>
+                            <td>{{ row.food_name }}</td>
+                            <td>{{ row.calories }}</td>
+                            <td>{{ row.protein }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <p class="no-data">No results yet. Please submit the form.</p>
+            {% endif %}
+
+        </section>
+    </main>
+
+
+</body>
+</html>

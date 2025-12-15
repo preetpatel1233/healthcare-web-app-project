@@ -1,0 +1,224 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Report</title>
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        Health Checkup
+        <nav class="top-nav">
+            <div><a href="{% url 'home' %}">Home</a></div>
+            <div><a href="{% url 'about' %}">About Us</a></div>
+            <div>Login</div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <nav>
+                <div><a href="">BMI Report</a></div>
+                <div><a href="{% url 'Diet' %}">Diet</a></div>
+                <div><a href="{% url 'Workout' %}">Workout</a></div>
+
+            </nav>
+        </aside>
+
+        <!-- FORM + RESULTS -->
+        <div class="container">
+
+            <!-- INPUT FORM -->
+            <form method="POST">
+                {% csrf_token %}
+                <div class="hw-card">
+                    <div class="inline">
+
+                        <div class="hw-field">
+                            <label for="height">Height (cm)</label>
+                            <input id="height" name="height" type="number" min="50" max="300" value="170">
+                        </div>
+
+                        <div class="hw-field">
+                            <label for="weight">Weight (kg)</label>
+                            <input id="weight" name="weight" type="number" min="20" max="300" value="70">
+                        </div>
+
+                        <div class="hw-field">
+                            <label for="age">Age (years)</label>
+                            <input id="age" name="age" type="number" min="5" max="120" value="25">
+                        </div>
+
+                        <div class="hw-field">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender">
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="hw-field">
+                            <label for="waist">Waist (cm) (Optional)</label>
+                            <input id="waist" name="waist" type="number" min="30" max="200">
+                        </div>
+
+                        <div class="hw-field">
+                            <label for="neck">Neck (cm) (Optional)</label>
+                            <input id="neck" name="neck" type="number" min="20" max="80">
+                        </div>
+
+                        <div class="actions" align="center">
+                            <button type="submit">Submit</button>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+            <!-- RESULT CARD -->
+            <div class="card">
+                <h2 style="text-align:center;">Your BMI Report: {{ bmi|floatformat:1 }}</h2>
+                <hr>
+
+                <!-- BODY FAT / MUSCLE / BONE -->
+                <div class="boxgraph">
+
+                    <!-- Body Fat -->
+                    <div class="box">
+                        <div class="graph" style="height:400px;width:300px;background-color:#f3f6fb;">
+                            <div class="circle" data-value="{{ bf }}"></div>
+                            {{ bf|floatformat:1 }}
+                        </div>
+                        <div class="type">Body Fat</div>
+                    </div>
+
+                    <!-- Muscle Mass -->
+                    <div class="box">
+                        <div class="graph" style="
+                            height:400px;width:300px;
+                            background-image:url(https://purepng.com/public/uploads/large/purepng.com-musclemusclemuscle-manbody-builderssix-packmuscle-boysclipartmuscle-black-and-white-1421526926350jxfkv.png);
+                            background-size:cover;background-color:#f3f6fb;
+                            font-size:30px;color:red;font-weight:900;
+                            display:flex;justify-content:center;align-items:center;text-align:center;">
+                            {{ mm|floatformat:1 }}
+                        </div>
+                        <div class="type">Muscle Mass</div>
+                    </div>
+
+                    <!-- Bone Density -->
+                    <div class="box">
+                        <div class="graph" style="
+                            height:400px;width:300px;
+                            background-image:url(https://tse4.mm.bing.net/th/id/OIP.3cbNVhJ-RqHQPx0xftFIVAHaHa);
+                            background-size:cover;
+                            font-size:30px;color:#3c3b3b;font-weight:900;
+                            display:flex;justify-content:center;align-items:center;">
+                            {{ bd|floatformat:1 }}
+                        </div>
+                        <div class="type">Bone Density</div>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <!-- DAILY NEED -->
+                <h2 align="center">Daily Need</h2>
+
+                <div class="boxgraph">
+
+                    <!-- Calories -->
+                    <div class="box">
+                        <div class="graph" style="height:360px;width:300px;background-color:#f3f6fb;">
+
+                            <div class="bar-box">
+                                <div class="bar1" style="--value: {{ c.0 }}"></div>
+                                <div class="label">Weight Gain</div>
+                                <div class="val">{{ c.0|floatformat:1 }} g</div>
+                            </div>
+
+                            <div class="bar-box">
+                                <div class="bar1" style="--value: {{ c.1 }}"></div>
+                                <div class="label">Muscle Gain</div>
+                                <div class="val">{{ c.1|floatformat:1 }} g</div>
+                            </div>
+
+                            <div class="bar-box">
+                                <div class="bar1" style="--value: {{ c.2 }}"></div>
+                                <div class="label">Maintain</div>
+                                <div class="val">{{ c.2|floatformat:1 }} g</div>
+                            </div>
+
+                        </div>
+                        <div class="type">Calories</div>
+                    </div>
+
+                    <!-- Water -->
+                    <div class="box">
+    <div class="graph" style="height:400px;width:300px;background-color:#f3f6fb;
+                             display:flex;justify-content:center;align-items:center;flex-direction:column;">
+        
+        <div class="water-box">
+            <div class="water" style="--level: {{ w }};"></div>
+        </div>
+
+        <div class="water-text">{{ w|floatformat:1 }} L</div>
+    </div>
+    <div class="type">Water</div>
+</div>
+
+
+                    <!-- Protein -->
+                    <div class="box">
+                        <div class="graph" style="height:360px;width:300px;background-color:aliceblue;">
+
+                            <div class="bar-box">
+                                <div class="bar" style="--value: {{ p.0 }}"></div>
+                                <div class="label">Normal</div>
+                                <div class="val">{{ p.0|floatformat:1 }} g</div>
+                            </div>
+
+                            <div class="bar-box">
+                                <div class="bar" style="--value: {{ p.1 }}"></div>
+                                <div class="label">Fat Loss</div>
+                                <div class="val">{{ p.1|floatformat:1 }} g</div>
+                            </div>
+
+                            <div class="bar-box">
+                                <div class="bar" style="--value: {{ p.2 }}"></div>
+                                <div class="label">Muscle Gain</div>
+                                <div class="val">{{ p.2|floatformat:1 }} g</div>
+                            </div>
+
+                        </div>
+                        <div class="type">Protein</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+<script>
+    let circle = document.querySelector('.circle');
+    if (circle) {
+        let val = parseFloat(circle.dataset.value);
+        circle.style.setProperty('--progress', val);
+    }
+</script>
+
+</html>

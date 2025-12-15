@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Checkup</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+ <style>
+     a {
+    color: #000;
+    text-decoration: none;
+}
+ </style>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        Health Checkup
+        <nav class="top-nav">
+           <div><a href="">Home</a></div>
+            <div><a href="{% url 'about' %}">About Us</a></div>
+            <div>Login</div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <nav>
+                <div><a href="{% url 'bmi' %}">BMI Report</a></div>
+                <div><a href="{% url 'Diet' %}">Diet</a></div>
+                <div><a href="{% url 'Workout' %}">Workout</a></div>
+            </nav>
+        </aside>
+
+        <!-- CONTENT -->
+        <section class="container">
+
+            <!-- CARDS -->
+            <div class="info-section">
+
+                <div class="card">
+                    <img src="https://media.istockphoto.com/id/1149483394/vector/medical-infographics-body-mass-index-obesity-and-overweight-illustration.jpg?s=170667a&w=0&k=20&c=oJynEtoKbbyajNWqgX0j-w7r--IipnFh0Io-BAoTBFE=" alt="" srcset="" style="width: 240px;">
+                    <h3>BMI & Muscle Analysis</h3>
+                    <p>We calculate your BMI and Body Muscle Mass based on your height & weight.</p>
+                </div>
+
+                <div class="card">
+                    <img src="https://www.foodandwine.com/thmb/iwziN9wNUurtB4PEl6yXrikG-eA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Best-Ways-of-Eating-Overall-2023-FT-BLOG0123-ea35b9c0013d46b196e655bd507edcbf.jpg" alt="" style="width:240px;">
+                    <h3>Personalised Diet Plan</h3>
+                    <p>Based on your report, we guide you with the right diet for better health.</p>
+                </div>
+
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.qXjQo3f35cfTqSdiJKH1vAHaEy?w=290&h=188&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="" srcset="" style="width: 240px;">
+                    <h3>Workout Routines</h3> 
+                    <p>We suggest basic and advanced exercises for fitness, recovery & stamina.</p>
+                </div>
+
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.BhZxf04jM3EGpM2vsabezQHaEK?w=279&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" alt="" srcset="" style="width: 240px;">
+                    <h3>Upload Extra Reports</h3>
+                    <p>You can upload thyroid, blood, sugar, vitamin reports for better guidance.</p>
+                </div>
+
+            </div>
+
+            <!-- WHY THIS WEBSITE HELPS -->
+            <div class="section">
+                <h2>Why This Website Helps You?</h2>
+                <p>India’s environment is changing fast. Air pollution, poor water quality, and climate conditions affect our health daily.</p>
+
+                <p><strong>Daily exercise protects your body from these environmental challenges.</strong></p>
+
+                <h3>Air Quality (AQI) & Your Health</h3>
+                <p>Bad air leads to:</p>
+
+                <pre>
+• Weak lungs
+• Low stamina
+• Low oxygen levels
+• Faster tiredness
+• Heart problems
+                </pre>
+
+                <h3>How Daily Exercise Helps</h3>
+
+                <pre>
+• Makes lungs stronger
+• Increases oxygen levels
+• Boosts immunity
+• Improves heart function
+• Reduces stress
+                </pre>
+
+                <p><strong>This website gives FREE workout plans, diet plans & report guidance.</strong></p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

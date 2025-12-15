@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+<body>
+     <header class="header">
+        Health Checkup
+        <nav class="top-nav">
+            <div><a href="{% url 'home' %}">Home</a></div>
+            <div><a>About Us</a></div>
+            <div>Login</div>
+            
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <nav>
+                <div><a href="{% url 'bmi' %}">BMI Report</a></div>
+                <div><a href="{% url 'Diet' %}">Diet</a></div>
+                <div><a href="{% url 'Workout' %}">Workout</a></div>
+
+            </nav>
+        </aside>
+
+        <!-- FORM + RESULTS -->
+        <div class="container">
+            <hr>
+            <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, eius enim. Illum eligendi obcaecati maiores, ad error magni. Molestiae, provident.</h3>
+            <h3>onsectetur adipisicing elit. Repellendus, eius enim. Illum eligendi obcaecati maiores, ad error magni. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum, rem hic harum maiores mollitia nemo, saepe fugiat voluptas eveniet doloremque error voluptatem laboriosam assumenda nihil tempora nobis dolorem inventore adipisci cupiditate temporibus? Iste sequi hic vel. Corrupti maiores illo cumque, saepe quasi eveniet et error. Explicabo reiciendis at ipsam architecto?</h3>
+            <hr>
+            <div class="first">
+                <h4>contact number</h4>
+                <p>9999888877766</p>
+                <h4>instagram id</h4>
+                <p>jfsffkdsh</p>
+            </div>
+            <div class="second">
+                <h4>Location</h4>
+                <p>abc:bhgg/104/ahmedabad/gujarat</p>
+            </div>
+</body>
+</html>

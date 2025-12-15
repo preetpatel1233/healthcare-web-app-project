@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        Health Checkup
+        <nav class="top-nav">
+            <div><a href="{% url 'home' %}">Home</a></div>
+            <div><a href="{% url 'about' %}">About Us</a></div>
+            <div>Login</div>
+
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <nav>
+                <div><a href="{% url 'bmi' %}">BMI Report</a></div>
+                <div><a href="{% url 'Diet' %}">Diet</a></div>
+                <div><a href="">Workout</a></div>
+
+            </nav>
+        </aside>
+
+        <!-- FORM + RESULTS -->
+        <div class="container">
+
+            <!-- INPUT FORM -->
+            <form method="POST">
+                {% csrf_token %}
+                <div class="hw-card">
+                    <div class="inline">
+
+                        <div class="hw-field">
+                            <label for="height">Height (cm)</label>
+                            <input id="height" name="height" type="number" min="50" max="300" value="170">
+                        </div>
+
+                        <div class="hw-field">
+                            <label for="weight">Weight (kg)</label>
+                            <input id="weight" name="weight" type="number" min="20" max="300" value="70">
+                        </div>
+
+                        <div class="hw-field">
+                            <label for="age">Age (years)</label>
+                            <input id="age" name="age" type="number" min="5" max="120" value="25">
+                        </div>
+
+                        <div class="hw-field">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender">
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                        </div>
+                         <select name="type">
+                            <option value="FL">Fat Loss</option>
+                            <option value="M">Maintain</option>
+                            <option value="MG">Muscle Gain</option>
+                        </select>
+                        <div class="actions" align="center">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <h2>Your Daily Calories: <span id="baseCal">{{ cb }}</span> kcal</h2>
+
+        <section>
+            <h3>Target Calories: {{ T }} kcal</h3>
+            <table border="1" cellpadding="8">
+    <tr>
+        <th>Workout</th>
+        <th>Type</th>
+        <th>Calories (30 min)</th>
+        <th>Main Purpose</th>
+        <th>Secondary Benefits</th>
+    </tr>
+
+    {% for row in D %}
+    <tr>
+        <td>{{ row.Workout }}</td>
+        <td>{{ row.Type }}</td>
+        <td>{{ row.cal_30 }}</td>
+        <td>{{ row.main_purpose }}</td>
+        <td>{{ row.secondary_benefits }}</td>
+    </tr>
+    {% endfor %}
+</table>
+        </section>
+</body>
+</html>
